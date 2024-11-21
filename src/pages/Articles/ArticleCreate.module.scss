@@ -1,0 +1,123 @@
+.createContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+
+    .pageTitle {
+      font-size: 2.5rem;
+      color: var(--text-primary);
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+
+      .draftStatus {
+        color: var(--success-color);
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .formCard {
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .form {
+    :global {
+      .ant-form-item-label > label {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .ant-input,
+      .ant-input-textarea {
+        background: var(--bg-secondary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+
+        &:hover,
+        &:focus {
+          border-color: var(--primary-color);
+        }
+      }
+    }
+  }
+
+  .editorWrapper {
+    margin-bottom: 24px;
+
+    .editorLabel {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .editor {
+      border-radius: 6px;
+      overflow: hidden;
+
+      :global {
+        .w-md-editor-toolbar {
+          background: var(--bg-secondary);
+          border-color: var(--border-color);
+        }
+
+        .w-md-editor-text {
+          color: var(--text-primary);
+        }
+
+        .w-md-editor-preview {
+          box-shadow: inset 1px 0 0 0 var(--border-color);
+        }
+      }
+    }
+  }
+
+  .submitWrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .createContainer {
+    padding: 1rem;
+
+    .header {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+
+      .pageTitle {
+        font-size: 2rem;
+      }
+
+      .actions {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .formCard {
+      padding: 1rem;
+    }
+  }
+} 

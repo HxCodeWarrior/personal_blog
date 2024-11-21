@@ -1,0 +1,19 @@
+.tagSelector {
+  width: 100%;
+
+  :global {
+    .ant-select-selector {
+      background: var(--bg-secondary) !important;
+      border-color: var(--border-color) !important;
+    }
+
+    .ant-select-selection-item {
+      background: var(--bg-tertiary) !important;
+      border-color: var(--border-color) !important;
+    }
+
+    .ant-tag {
+      margin-right: 0;
+    }
+  }
+} 

@@ -1,0 +1,38 @@
+.confirmDialog {
+  :global {
+    .ant-modal-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .ant-modal-header {
+      background: transparent;
+      border-bottom-color: var(--border-color);
+
+      .ant-modal-title {
+        color: var(--text-primary);
+      }
+    }
+
+    .ant-modal-close {
+      color: var(--text-secondary);
+
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+
+    .ant-modal-footer {
+      border-top-color: var(--border-color);
+    }
+  }
+
+  .content {
+    color: var(--text-secondary);
+    margin: 1rem 0;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+} 

@@ -1,0 +1,316 @@
+.loginContainer {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: url('/assets/circuit-pattern.svg') repeat;
+    opacity: 0.1;
+    animation: backgroundMove 60s linear infinite;
+  }
+  
+  .formCard {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+      
+      img {
+        width: 80px;
+        height: 80px;
+        animation: logoFloat 3s ease-in-out infinite;
+      }
+    }
+    
+    h1 {
+      text-align: center;
+      color: #1a2a6c;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      font-weight: 600;
+      background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .inputGroup {
+      position: relative;
+      margin-bottom: 1.5rem;
+      
+      .inputIcon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+        transition: color 0.3s ease;
+      }
+      
+      .togglePassword {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          color: #1a2a6c;
+        }
+      }
+      
+      input {
+        width: 100%;
+        padding: 1rem 2.5rem;
+        border: 2px solid #e1e1e1;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+        
+        &:focus {
+          border-color: #1a2a6c;
+          box-shadow: 0 0 0 4px rgba(26, 42, 108, 0.1);
+          outline: none;
+        }
+        
+        &.error {
+          border-color: #b21f1f;
+          animation: shake 0.5s ease-in-out;
+        }
+      }
+    }
+    
+    .rememberMe {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      user-select: none;
+      
+      input[type="checkbox"] {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #e1e1e1;
+        border-radius: 6px;
+        margin-right: 0.5rem;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s ease;
+        
+        &:checked {
+          background: #1a2a6c;
+          border-color: #1a2a6c;
+          
+          &::after {
+            content: '✓';
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+          }
+        }
+      }
+      
+      label {
+        color: #666;
+        cursor: pointer;
+      }
+    }
+    
+    .submitButton {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: 0.5s;
+      }
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(26, 42, 108, 0.2);
+        
+        &::before {
+          left: 100%;
+        }
+      }
+      
+      &:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 2rem 0;
+      color: #666;
+      
+      &::before,
+      &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: #e1e1e1;
+      }
+      
+      span {
+        padding: 0 1rem;
+      }
+    }
+    
+    .socialLogin {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      
+      button {
+        width: 48px;
+        height: 48px;
+        border: none;
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+    
+    .links {
+      text-align: center;
+      margin-top: 1.5rem;
+      
+      a {
+        color: #1a2a6c;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        
+        &:hover {
+          color: #b21f1f;
+        }
+        
+        &:not(:last-child) {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@keyframes backgroundMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.errorMessage {
+  color: #b21f1f;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeIn 0.3s ease;
+  
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 

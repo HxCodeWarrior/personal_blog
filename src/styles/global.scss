@@ -1,0 +1,269 @@
+// 设置 CSS 变量，使用更现代的配色方案和设计系统
+:root {
+    // 主题色板
+    --primary-50: #eff6ff;
+    --primary-100: #dbeafe;
+    --primary-200: #bfdbfe;
+    --primary-300: #93c5fd;
+    --primary-400: #60a5fa;
+    --primary-500: #3b82f6;
+    --primary-600: #2563eb;
+    --primary-700: #1d4ed8;
+    --primary-800: #1e40af;
+    --primary-900: #1e3a8a;
+    
+    // 中性色
+    --neutral-50: #fafafa;
+    --neutral-100: #f5f5f5;
+    --neutral-200: #e5e5e5;
+    --neutral-300: #d4d4d4;
+    --neutral-400: #a3a3a3;
+    --neutral-500: #737373;
+    --neutral-600: #525252;
+    --neutral-700: #404040;
+    --neutral-800: #262626;
+    --neutral-900: #171717;
+    
+    // 功能色
+    --success-light: #86efac;
+    --success: #22c55e;
+    --success-dark: #15803d;
+    
+    --warning-light: #fcd34d;
+    --warning: #f59e0b;
+    --warning-dark: #b45309;
+    
+    --error-light: #fca5a5;
+    --error: #ef4444;
+    --error-dark: #b91c1c;
+    
+    // 阴影
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    // 圆角
+    --radius-sm: 0.125rem;
+    --radius: 0.25rem;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-full: 9999px;
+    
+    // 动画
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+  
+// 现代化的重置样式
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+  
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}
+  
+body {
+    min-height: 100vh;
+    line-height: 1.5;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: var(--neutral-800);
+    background-color: var(--neutral-50);
+    -webkit-font-smoothing: antialiased;
+}
+  
+// 增强的排版系统
+.text {
+    &-xs { font-size: 0.75rem; }
+    &-sm { font-size: 0.875rem; }
+    &-base { font-size: 1rem; }
+    &-lg { font-size: 1.125rem; }
+    &-xl { font-size: 1.25rem; }
+    &-2xl { font-size: 1.5rem; }
+    &-3xl { font-size: 1.875rem; }
+    
+    &-thin { font-weight: 100; }
+    &-light { font-weight: 300; }
+    &-normal { font-weight: 400; }
+    &-medium { font-weight: 500; }
+    &-semibold { font-weight: 600; }
+    &-bold { font-weight: 700; }
+}
+  
+// 增强的 Flex 布局工具
+.flex {
+    display: flex;
+    
+    &-inline { display: inline-flex; }
+    &-col { flex-direction: column; }
+    &-wrap { flex-wrap: wrap; }
+    
+    &-center { 
+      align-items: center; 
+      justify-content: center;
+    }
+    
+    &-start {
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    
+    &-end {
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+    
+    &-between {
+      justify-content: space-between;
+    }
+    
+    // Flex 子元素工具
+    &-1 { flex: 1; }
+    &-auto { flex: auto; }
+    &-initial { flex: initial; }
+    &-none { flex: none; }
+}
+  
+// Grid 系统
+.grid {
+    display: grid;
+    
+    &-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    &-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    &-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    &-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    &-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    
+    &-gap-2 { gap: 0.5rem; }
+    &-gap-4 { gap: 1rem; }
+    &-gap-6 { gap: 1.5rem; }
+    &-gap-8 { gap: 2rem; }
+}
+  
+// 现代化按钮样式
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    transition: var(--transition);
+    cursor: pointer;
+    
+    &-primary {
+      background-color: var(--primary-500);
+      color: white;
+      
+      &:hover {
+        background-color: var(--primary-600);
+      }
+      
+      &:active {
+        background-color: var(--primary-700);
+      }
+    }
+    
+    &-outline {
+      border: 1px solid var(--neutral-300);
+      background-color: transparent;
+      
+      &:hover {
+        background-color: var(--neutral-100);
+      }
+    }
+    
+    &-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+    }
+    
+    &-lg {
+      padding: 0.75rem 1.5rem;
+      font-size: 1.125rem;
+    }
+}
+  
+// 增强的表单元素
+.input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--neutral-300);
+    border-radius: var(--radius);
+    transition: var(--transition);
+    
+    &:focus {
+      outline: none;
+      border-color: var(--primary-500);
+      box-shadow: 0 0 0 3px var(--primary-100);
+    }
+    
+    &:disabled {
+      background-color: var(--neutral-100);
+      cursor: not-allowed;
+    }
+    
+    &-error {
+      border-color: var(--error);
+      
+      &:focus {
+        box-shadow: 0 0 0 3px var(--error-light);
+      }
+    }
+}
+  
+// 实用工具类
+.hidden { display: none !important; }
+.invisible { visibility: hidden !important; }
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+  
+// 动画类
+.animate {
+    &-spin { animation: spin 1s linear infinite; }
+    &-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    &-bounce { animation: bounce 1s infinite; }
+}
+  
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+  
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .5; }
+}
+  
+@keyframes bounce {
+    0%, 100% { transform: translateY(-25%); }
+    50% { transform: translateY(0); }
+}
+  
+// 响应式布局增强
+@mixin responsive($breakpoint) {
+    @if $breakpoint == sm {
+      @media (min-width: 640px) { @content; }
+    } @else if $breakpoint == md {
+      @media (min-width: 768px) { @content; }
+    } @else if $breakpoint == lg {
+      @media (min-width: 1024px) { @content; }
+    } @else if $breakpoint == xl {
+      @media (min-width: 1280px) { @content; }
+    } @else if $breakpoint == 2xl {
+      @media (min-width: 1536px) { @content; }
+    }
+}

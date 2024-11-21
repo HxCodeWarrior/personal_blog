@@ -1,0 +1,33 @@
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: transparent;
+  transition: all 0.3s ease;
+
+  &--scrolled {
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    text-decoration: none;
+    color: inherit;
+    
+    &-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+} 

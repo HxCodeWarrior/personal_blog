@@ -1,0 +1,9 @@
+// 全局禁用 Ant Design 的 Wave 效果
+.ant-wave {
+  display: none !important;
+}
+
+[ant-click-animating-without-extra-node="true"]::after,
+.ant-click-animating-node {
+  display: none !important;
+} 

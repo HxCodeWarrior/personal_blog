@@ -1,0 +1,248 @@
+// 变量定义
+$container-max-width: 1200px;
+$container-padding: 2rem;
+$grid-gap: 2rem;
+$mobile-breakpoint: 768px;
+$card-min-width: 380px;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin gradient-text {
+  background: linear-gradient(120deg, #2196F3, #00BCD4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@mixin hover-transform {
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+// 主容器样式
+.articlesContainer {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: $container-padding;
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    var(--bg-gradient-start, rgba(255, 255, 255, 0.05)),
+    var(--bg-gradient-end, transparent)
+  );
+
+  // 页头样式
+  .header {
+    @include flex-between;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+
+    .pageTitle {
+      font-size: 3rem;
+      color: var(--text-primary);
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      transition: color 0.3s ease;
+
+      .titleHighlight {
+        @include gradient-text;
+        padding-right: 0.5rem;
+      }
+    }
+  }
+
+  // 文章列表网格
+  .articlesList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax($card-min-width, 1fr));
+    gap: $grid-gap;
+    margin-bottom: 3rem;
+    perspective: 1000px;
+  }
+
+  // 文章卡片包装器
+  .articleWrapper {
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+    
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  // 文章元数据
+  .articleMeta {
+    @include flex-center;
+    gap: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    display: inline-flex;
+
+    .metaItem {
+      @include flex-center;
+      gap: 0.5rem;
+    }
+  }
+
+  // 文章摘要
+  .summary {
+    color: var(--text-secondary);
+    margin: 1.5rem 0;
+    line-height: 1.6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    max-height: 4.8em;
+  }
+
+  // 标签容器
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 0.5rem 0;
+  }
+
+  // 日期样式
+  .date {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  // 分页样式
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    padding: 1rem 0;
+  }
+
+  // 响应式设计
+  @media (max-width: $mobile-breakpoint) {
+    padding: 1rem;
+
+    .header {
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+
+      .pageTitle {
+        font-size: 2.5rem;
+      }
+    }
+
+    .articlesList {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .articleMeta {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+
+      .metaItem {
+        width: 100%;
+      }
+    }
+
+    .summary {
+      margin: 1rem 0;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
+  }
+
+  // 深色模式适配
+  @media (prefers-color-scheme: dark) {
+    .summary {
+      opacity: 0.8;
+    }
+
+    .date {
+      opacity: 0.7;
+    }
+  }
+
+  // 添加平滑过渡效果
+  .skeletonContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax($card-min-width, 1fr));
+    gap: $grid-gap;
+    will-change: transform, opacity;
+  }
+
+  .articleWrapper {
+    position: relative;
+    will-change: transform, opacity;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--bg-gradient-end, rgba(0, 0, 0, 0.05))
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+
+  .paginationWrapper {
+    position: relative;
+    margin-top: 3rem;
+    padding: 1rem 0;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--border-color, rgba(255, 255, 255, 0.1)),
+        transparent
+      );
+    }
+  }
+}
+
+.editButton {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:focus {
+    outline: none;
+  }
+} 

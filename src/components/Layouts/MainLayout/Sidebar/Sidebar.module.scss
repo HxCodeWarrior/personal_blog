@@ -1,0 +1,222 @@
+.sidebar {
+  width: 280px;
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.98) 0%, rgba(18, 18, 18, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  height: 100vh;
+  padding: 1.5rem 1rem;
+  position: fixed;
+  left: 0;
+  top: 70px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &.collapsed {
+    width: 80px;
+    padding: 1.5rem 0.5rem;
+
+    .menuTitle {
+      justify-content: center;
+      padding: 0.75rem 0;
+      
+      .icon {
+        margin-right: 0;
+      }
+    }
+
+    .collapseButton {
+      right: -12px;
+    }
+  }
+
+  .collapseButton {
+    position: absolute;
+    top: 1rem;
+    right: -12px;
+    width: 28px;
+    height: 28px;
+    background: #2196F3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+    z-index: 10;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: #1976D2;
+      box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+    }
+  }
+
+  .menuItem {
+    margin-bottom: 0.5rem;
+    position: relative;
+    
+    .menuTitle {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: rgba(33, 150, 243, 0.3);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      &.active {
+        background: rgba(33, 150, 243, 0.15);
+        border-color: rgba(33, 150, 243, 0.5);
+        box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+      }
+
+      .icon {
+        font-size: 1.2rem;
+        margin-right: 0.75rem;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
+
+      .title {
+        flex: 1;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+      }
+
+      .arrow {
+        font-size: 0.8rem;
+        opacity: 0.5;
+        transition: all 0.3s ease;
+      }
+
+      .hoverGlow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at center,
+          rgba(33, 150, 243, 0.15) 0%,
+          rgba(33, 150, 243, 0) 70%
+        );
+        pointer-events: none;
+      }
+    }
+
+    .subItems {
+      margin: 0.5rem 0 0.5rem 1rem;
+      overflow: hidden;
+
+      .subItemLink {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .subItem {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0.25rem 0;
+        position: relative;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(33, 150, 243, 0.08);
+          border-color: rgba(33, 150, 243, 0.2);
+          color: #fff;
+        }
+
+        &.active {
+          background: rgba(33, 150, 243, 0.12);
+          border-color: rgba(33, 150, 243, 0.4);
+          color: #2196F3;
+        }
+
+        .icon {
+          font-size: 1rem;
+          margin-right: 0.75rem;
+          display: flex;
+          align-items: center;
+        }
+
+        .title {
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+
+        .activeIndicator {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 3px;
+          height: 60%;
+          background: #2196F3;
+          border-radius: 2px 0 0 2px;
+          box-shadow: 0 0 8px rgba(33, 150, 243, 0.4);
+        }
+      }
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(33, 150, 243, 0.3);
+    border-radius: 2px;
+    
+    &:hover {
+      background: rgba(33, 150, 243, 0.5);
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 1024px) {
+  .sidebar {
+    &:not(.collapsed) {
+      width: 250px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    z-index: 1000;
+    
+    &.open {
+      transform: translateX(0);
+    }
+    
+    &.collapsed {
+      transform: translateX(-80px);
+      
+      &.open {
+        transform: translateX(0);
+      }
+    }
+  }
+} 

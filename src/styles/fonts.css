@@ -1,0 +1,8 @@
+/* 这里可以引入您的自定义字体 */
+@font-face {
+  font-family: 'YourCustomFont';
+  src: url('/fonts/your-custom-font.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+} 

@@ -1,0 +1,204 @@
+.skillsContainer {
+  position: relative;
+  min-height: 100vh;
+  padding: clamp(1rem, 3vw, 3rem);
+  max-width: 1600px;
+  margin: 0 auto;
+  overflow: hidden;
+  
+  // 优化背景装饰
+  .backgroundDecoration {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    
+    .gradientOrb {
+      position: absolute;
+      top: 10%;
+      left: 15%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(
+        circle,
+        rgba(33, 150, 243, 0.08) 0%,
+        rgba(233, 30, 99, 0.08) 50%,
+        transparent 70%
+      );
+      filter: blur(80px);
+      opacity: 0.8;
+      animation: orbFloat 20s ease-in-out infinite;
+      
+      &:nth-child(2) {
+        top: 60%;
+        left: 70%;
+        width: 600px;
+        height: 600px;
+        animation-delay: -10s;
+      }
+    }
+    
+    .gridPattern {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+    }
+  }
+
+  // 优化内容区域布局
+  .contentWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 4vw, 4rem);
+    padding: clamp(1rem, 2vw, 2rem);
+  }
+
+  // 优化标题区域
+  .header {
+    text-align: center;
+    padding: clamp(3rem, 6vw, 6rem) 0;
+    transition: all 0.6s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    
+    &.scrolled {
+      padding: clamp(1.5rem, 3vw, 3rem) 0;
+      backdrop-filter: blur(12px);
+      background: rgba(17, 25, 40, 0.6);
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin: 0 clamp(1rem, 2vw, 2rem);
+    }
+  }
+
+  // 重新设计技能卡片网格布局
+  .skillsGrid {
+    display: grid;
+    // 使用固定列宽，避免卡片重叠
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 2.5rem;
+    padding: 2rem;
+    perspective: 2000px;
+    
+    // 确保卡片容器有足够空间
+    .skillCardWrapper {
+      min-height: 400px; // 设置最小高度
+      transform-style: preserve-3d;
+      will-change: transform;
+      
+      // 添加错落效果，但避免重叠
+      @media (min-width: 1200px) {
+        &:nth-child(even) {
+          margin-top: 2rem;
+        }
+        
+        // 悬浮效果优化
+        &:hover {
+          z-index: 1;
+          ~ .skillCardWrapper {
+            transform: translateX(10px) scale(0.98);
+            opacity: 0.8;
+            transition: all 0.4s ease;
+          }
+        }
+      }
+    }
+    
+    // 响应式布局优化
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      
+      .skillCardWrapper {
+        margin-top: 0 !important; // 移动端取消错落效果
+      }
+    }
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+  }
+
+  // 优化骨架屏网格
+  .skeletonGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 2.5rem;
+    padding: 2rem;
+    
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+  }
+}
+
+// 优化动画关键帧
+@keyframes orbFloat {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(80px, 40px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-40px, 80px) rotate(240deg);
+  }
+}
+
+// 添加滚动优化
+@media (prefers-reduced-motion: no-preference) {
+  .skillsContainer {
+    .skillsGrid {
+      .skillCardWrapper {
+        transition: transform 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000),
+                    opacity 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+      }
+    }
+  }
+}
+
+// 暗色主题优化
+@media (prefers-color-scheme: dark) {
+  .skillsContainer {
+    .backgroundDecoration {
+      opacity: 0.9;
+      
+      .gradientOrb {
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+// 打印样式优化
+@media print {
+  .skillsContainer {
+    padding: 2rem;
+    
+    .backgroundDecoration {
+      display: none;
+    }
+    
+    .skillsGrid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      
+      .skillCardWrapper {
+        margin-top: 0 !important;
+        page-break-inside: avoid;
+      }
+    }
+  }
+}

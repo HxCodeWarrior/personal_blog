@@ -1,0 +1,175 @@
+// 变量
+$transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+$shadow-color: rgba(0, 0, 0, 0.15);
+$primary-gradient: linear-gradient(120deg, #2196F3, #00BCD4);
+$primary-hover-gradient: linear-gradient(120deg, #1976D2, #0097A7);
+
+// Mixins
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s $transition-timing;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  padding: 0 16px;
+  background: transparent;
+  border: 1px solid #d9d9d9;
+  color: rgba(0, 0, 0, 0.88);
+  border-radius: 6px;
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px $shadow-color;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+// 按钮样式
+.button {
+  @include button-base;
+
+  // 尺寸变体
+  &.large {
+    height: 40px;
+    font-size: 16px;
+    padding: 0 20px;
+  }
+
+  &.middle {
+    height: 32px;
+    font-size: 14px;
+  }
+
+  &.small {
+    height: 24px;
+    font-size: 12px;
+    padding: 0 12px;
+  }
+
+  // 类型变体
+  &.primary {
+    background: $primary-gradient;
+    color: white;
+    border: none;
+
+    &:hover:not(:disabled) {
+      background: $primary-hover-gradient;
+    }
+  }
+
+  &.text {
+    border: none;
+    padding: 0;
+    height: auto;
+    background: transparent;
+
+    &:hover:not(:disabled) {
+      background: rgba(0, 0, 0, 0.04);
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  // 按钮变体
+  &.create {
+    padding: 0 2rem;
+    height: 44px;
+    font-weight: 500;
+    border-radius: 22px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  &.view {
+    border-radius: 20px;
+    padding: 4px 16px;
+    height: 36px;
+  }
+
+  &.edit {
+    opacity: 0.6;
+    padding: 4px;
+
+    &:hover:not(:disabled) {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  &.danger {
+    color: var(--error-color);
+    border-color: var(--error-color);
+    
+    &:hover:not(:disabled) {
+      color: white;
+      background: var(--error-color);
+      border-color: var(--error-color);
+    }
+  }
+
+  &.delete {
+    padding: 0 1.5rem;
+    height: 36px;
+    border-radius: 18px;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
+  }
+
+  // 图标样式
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.iconOnly {
+    padding: 0;
+    width: 32px;
+    
+    &.large {
+      width: 40px;
+    }
+
+    &.small {
+      width: 24px;
+    }
+  }
+}
+
+// 深色模式适配
+@media (prefers-color-scheme: dark) {
+  .button {
+    color: rgba(255, 255, 255, 0.85);
+    border-color: #434343;
+
+    &:not(.primary):not(.text):hover:not(:disabled) {
+      border-color: #177ddc;
+    }
+
+    &.text:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &.primary {
+      &:hover:not(:disabled) {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+} 

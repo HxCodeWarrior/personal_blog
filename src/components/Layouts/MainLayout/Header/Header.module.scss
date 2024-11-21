@@ -1,0 +1,610 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(33, 150, 243, 0.1),
+      rgba(33, 203, 243, 0.1)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &.scrolled {
+    background: rgba(18, 18, 18, 0.95);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .headerContent {
+      padding: 0.5rem 2rem;
+    }
+  }
+
+  .headerContent {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    transition: padding 0.3s ease;
+  }
+
+  // Logo样式优化
+  .logo {
+    text-decoration: none;
+    position: relative;
+    
+    .logoContent {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      
+      .logoIcon {
+        font-size: 2rem;
+        background: linear-gradient(45deg, #2196F3, #21CBF3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 0 10px rgba(33, 150, 243, 0.3));
+      }
+
+      .logoText {
+        font-size: 1.5rem;
+        font-weight: 700;
+        background: linear-gradient(45deg, #2196F3, #21CBF3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 0.5px;
+        position: relative;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, #2196F3, transparent);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.3s ease;
+        }
+      }
+
+      &:hover {
+        .logoText::after {
+          transform: scaleX(1);
+        }
+      }
+    }
+  }
+
+  // 导航样式优化
+  .navigation {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -20px;
+      right: -20px;
+      height: 40px;
+      transform: translateY(-50%);
+      background: radial-gradient(
+        circle at center,
+        rgba(33, 150, 243, 0.1) 0%,
+        transparent 70%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover::before {
+      opacity: 1;
+    }
+
+    .navItemWrapper {
+      position: relative;
+    }
+
+    .navItem {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .navIcon {
+        font-size: 1.2rem;
+        position: relative;
+        z-index: 1;
+        transition: all 0.3s ease;
+      }
+
+      .navText {
+        position: relative;
+        z-index: 1;
+        font-weight: 500;
+      }
+
+      &:hover {
+        color: #fff;
+
+        &::before {
+          transform: translateY(0);
+        }
+      }
+
+      &.active {
+        color: #2196F3;
+        background: rgba(33, 150, 243, 0.1);
+        
+        .activeIndicator {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #2196F3, #21CBF3);
+          border-radius: 2px;
+          box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+      }
+    }
+  }
+
+  // Header Actions样式优化
+  .headerActions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    // Search组件样式
+    .search {
+      .searchWrapper {
+        position: relative;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        transition: all 0.3s ease;
+
+        &.expanded {
+          background: rgba(255, 255, 255, 0.1);
+          box-shadow: 0 0 15px rgba(33, 150, 243, 0.2);
+        }
+
+        .searchToggle {
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          background: none;
+          color: rgba(255, 255, 255, 0.7);
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover {
+            color: #2196F3;
+          }
+        }
+
+        .searchInputWrapper {
+          flex: 1;
+          position: relative;
+
+          input {
+            width: 100%;
+            height: 100%;
+            padding: 0 40px 0 10px;
+            border: none;
+            background: none;
+            color: #fff;
+            font-size: 1rem;
+
+            &::placeholder {
+              color: rgba(255, 255, 255, 0.5);
+            }
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          .clearSearch {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s ease;
+
+            &:hover {
+              color: #f44336;
+            }
+          }
+        }
+      }
+    }
+
+    // Theme Switch样式
+    .themeSwitch {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at center,
+          rgba(33, 150, 243, 0.2) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #2196F3;
+
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      .themeSwitchIcon {
+        font-size: 1.2rem;
+      }
+    }
+
+    // User Menu样式
+    .userMenu {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+
+      .notificationIcon {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        color: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: #2196F3;
+        }
+
+        .notificationBadge {
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          min-width: 18px;
+          height: 18px;
+          padding: 0 5px;
+          background: #f44336;
+          color: white;
+          font-size: 0.7rem;
+          font-weight: 600;
+          border-radius: 9px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 2px solid rgba(18, 18, 18, 0.95);
+          box-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
+        }
+      }
+
+      .notificationsDropdown {
+        position: absolute;
+        top: calc(100% + 1rem);
+        right: 0;
+        width: 320px;
+        background: rgba(26, 26, 26, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+
+        .notification {
+          padding: 1rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          transition: all 0.3s ease;
+
+          &.unread {
+            background: rgba(33, 150, 243, 0.05);
+
+            &::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 3px;
+              height: 60%;
+              background: #2196F3;
+              border-radius: 0 2px 2px 0;
+            }
+          }
+
+          .notificationContent {
+            h4 {
+              margin: 0 0 0.5rem;
+              font-size: 1rem;
+              color: #fff;
+            }
+
+            p {
+              margin: 0;
+              font-size: 0.9rem;
+              color: rgba(255, 255, 255, 0.7);
+            }
+
+            .timestamp {
+              display: block;
+              margin-top: 0.5rem;
+              font-size: 0.8rem;
+              color: rgba(255, 255, 255, 0.5);
+            }
+          }
+        }
+      }
+
+      .profile {
+        position: relative;
+
+        .profileIcon {
+          position: relative;
+          cursor: pointer;
+          
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgba(33, 150, 243, 0.3);
+            transition: all 0.3s ease;
+          }
+
+          .statusIndicator {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border-radius: 50%;
+            border: 2px solid rgba(18, 18, 18, 0.95);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+          }
+
+          &:hover img {
+            border-color: #2196F3;
+            box-shadow: 0 0 15px rgba(33, 150, 243, 0.3);
+          }
+        }
+
+        .profileDropdown {
+          position: absolute;
+          top: calc(100% + 1rem);
+          right: 0;
+          width: 280px;
+          background: rgba(26, 26, 26, 0.95);
+          backdrop-filter: blur(10px);
+          border-radius: 12px;
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          overflow: hidden;
+
+          .profileHeader {
+            padding: 1.5rem;
+            background: linear-gradient(
+              to bottom,
+              rgba(33, 150, 243, 0.1),
+              transparent
+            );
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            img {
+              width: 48px;
+              height: 48px;
+              border-radius: 50%;
+              border: 2px solid rgba(33, 150, 243, 0.3);
+            }
+
+            .profileInfo {
+              h4 {
+                margin: 0;
+                color: #fff;
+                font-size: 1.1rem;
+              }
+
+              span {
+                display: block;
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 0.9rem;
+
+                &.role {
+                  color: #2196F3;
+                  font-size: 0.8rem;
+                  margin-top: 0.25rem;
+                }
+              }
+            }
+          }
+
+          .dropdownDivider {
+            height: 1px;
+            background: linear-gradient(
+              90deg,
+              transparent,
+              rgba(255, 255, 255, 0.1),
+              transparent
+            );
+            margin: 0.5rem 0;
+          }
+
+          .dropdownItem {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+
+            &::before {
+              content: '';
+              position: absolute;
+              inset: 0;
+              background: rgba(255, 255, 255, 0.1);
+              transform: translateX(-100%);
+              transition: transform 0.3s ease;
+            }
+
+            svg {
+              font-size: 1.1rem;
+              position: relative;
+              z-index: 1;
+            }
+
+            span {
+              position: relative;
+              z-index: 1;
+            }
+
+            &:hover {
+              color: #fff;
+
+              &::before {
+                transform: translateX(0);
+              }
+            }
+
+            &:last-child {
+              color: #f44336;
+              
+              &:hover {
+                background: rgba(244, 67, 54, 0.1);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 响应式设计优化
+@media (max-width: 1024px) {
+  .header {
+    .headerContent {
+      padding: 0.75rem 1.5rem;
+    }
+
+    .navigation {
+      gap: 1rem;
+
+      .navItem {
+        padding: 0.5rem 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    .headerContent {
+      padding: 0.75rem 1rem;
+    }
+
+    .navigation {
+      .navItem {
+        padding: 0.5rem;
+        
+        .navText {
+          display: none;
+        }
+      }
+    }
+
+    .headerActions {
+      gap: 1rem;
+
+      .search {
+        .searchWrapper.expanded {
+          width: 200px;
+        }
+      }
+    }
+  }
+} 

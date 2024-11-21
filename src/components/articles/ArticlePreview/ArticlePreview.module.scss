@@ -1,0 +1,69 @@
+.previewOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.previewContent {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.previewTitle {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.markdownContent {
+  color: var(--text-primary);
+  line-height: 1.8;
+  font-size: 1.1rem;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    margin: 2rem 0 1rem;
+  }
+
+  p {
+    margin: 1rem 0;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  pre {
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+
+  blockquote {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: var(--text-secondary);
+  }
+
+  ul, ol {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+} 

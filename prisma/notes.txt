@@ -1,0 +1,31 @@
+1、设置DATABASE_URL环境变量
+
+2、初始化数据库
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+3、创建种子数据
+```bash
+npx prisma db seed
+```
+4、创建迁移脚本
+```bash
+npx prisma migrate dev --name init
+```
+
+5、创建数据库迁移
+```bash
+# 创建迁移
+npx prisma migrate dev --name add_article_status_and_metrics
+
+# 应用迁移到生产环境
+npx prisma migrate deploy
+```
+
+6、运行种子脚本
+```bash
+npx prisma db：seed
+```
+

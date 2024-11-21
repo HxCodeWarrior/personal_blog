@@ -1,0 +1,25 @@
+.editorContainer {
+  .toolbar {
+    margin-bottom: 1rem;
+  }
+
+  .editor {
+    border-radius: 6px;
+    overflow: hidden;
+
+    :global {
+      .w-md-editor-toolbar {
+        background: var(--bg-secondary);
+        border-color: var(--border-color);
+      }
+
+      .w-md-editor-text {
+        color: var(--text-primary);
+      }
+
+      .w-md-editor-preview {
+        box-shadow: inset 1px 0 0 0 var(--border-color);
+      }
+    }
+  }
+} 

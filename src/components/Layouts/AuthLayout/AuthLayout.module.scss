@@ -1,0 +1,104 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.authLayout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--background-color, #f5f5f5);
+  
+  .header {
+    padding: 16px 24px;
+    background: var(--header-bg, #fff);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    z-index: 2;
+    
+    .logo {
+      height: 32px;
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
+  }
+
+  .container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: $screen-sm) {
+      padding: 16px;
+    }
+  }
+
+  .content {
+    width: 100%;
+    max-width: var(--content-width, 400px);
+    background: var(--content-bg, #fff);
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    @media (max-width: $screen-sm) {
+      padding: 24px;
+      box-shadow: none;
+    }
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--title-color, #1a1a1a);
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--subtitle-color, #666);
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .footer {
+    padding: 16px 24px;
+    background: var(--footer-bg, #fff);
+    text-align: center;
+    color: var(--footer-text, #666);
+    z-index: 2;
+
+    .links {
+      margin-bottom: 8px;
+      
+      a {
+        color: var(--link-color, #666);
+        margin: 0 8px;
+        text-decoration: none;
+        
+        &:hover {
+          color: var(--link-hover-color, #1a1a1a);
+        }
+      }
+    }
+  }
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+  }
+}

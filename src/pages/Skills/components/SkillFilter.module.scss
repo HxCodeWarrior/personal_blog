@@ -1,0 +1,232 @@
+.filterContainer {
+  margin-bottom: 2.5rem;
+  padding: 0.5rem;
+  perspective: 1000px;
+  
+  .filterWrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 4px 24px -1px rgba(0, 0, 0, 0.2),
+      0 0 1px 0 rgba(0, 0, 0, 0.16);
+    transform-style: preserve-3d;
+    
+    // 添加光晕效果
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 0.06) 0%,
+        transparent 60%
+      );
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+
+  .filterButton {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transform-style: preserve-3d;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    // 添加玻璃态效果
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0.03)
+      );
+      mask: linear-gradient(#fff 0 0) content-box, 
+            linear-gradient(#fff 0 0);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, 
+                   linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateZ(4px);
+      
+      .icon {
+        transform: translateZ(8px) scale(1.1);
+      }
+      
+      .text {
+        transform: translateZ(6px);
+        color: rgba(255, 255, 255, 0.95);
+      }
+    }
+
+    .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateZ(4px);
+      
+      // 添加图标光晕
+      &::after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        filter: blur(4px);
+        z-index: -1;
+      }
+    }
+
+    .text {
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateZ(2px);
+    }
+
+    &.active {
+      background: rgba(33, 150, 243, 0.15);
+      color: white;
+      font-weight: 600;
+      transform: translateZ(6px);
+      
+      // 活跃状态的渐变背景
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          135deg,
+          rgba(33, 150, 243, 0.4),
+          rgba(233, 30, 99, 0.4)
+        );
+        opacity: 0;
+        animation: fadeIn 0.3s ease forwards;
+      }
+      
+      .icon {
+        transform: translateZ(10px) scale(1.2);
+      }
+      
+      .text {
+        transform: translateZ(8px);
+        text-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+      }
+    }
+
+    .activeIndicator {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(
+        90deg,
+        #2196f3,
+        #e91e63
+      );
+      border-radius: 3px;
+      transform: translateZ(2px);
+      
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: inherit;
+        filter: blur(6px);
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+// 动画关键帧
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 0.2; }
+}
+
+// 响应式优化
+@media (max-width: 768px) {
+  .filterContainer {
+    .filterButton {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      
+      .icon {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .filterContainer {
+    .filterButton {
+      padding: 0.5rem;
+      
+      .text {
+        display: none;
+      }
+      
+      .icon {
+        margin: 0;
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+// 暗色主题优化
+@media (prefers-color-scheme: dark) {
+  .filterContainer {
+    .filterWrapper {
+      background: rgba(17, 25, 40, 0.6);
+    }
+    
+    .filterButton {
+      &.active {
+        background: rgba(33, 150, 243, 0.2);
+      }
+    }
+  }
+} 

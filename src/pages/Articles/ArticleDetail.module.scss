@@ -1,0 +1,177 @@
+.articleContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+
+  .articleCard {
+    backdrop-filter: blur(10px);
+  }
+
+  .headerTitle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+
+    .backButton {
+      margin-right: 0.5rem;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translateX(-4px);
+      }
+    }
+  }
+
+  .headerActions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .meta {
+    margin: 1.5rem 0;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+
+    .authorInfo {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+
+      .author {
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .date {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+    }
+
+    .stats {
+      display: flex;
+      gap: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  .content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 2rem 0 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 2rem 0;
+    }
+
+    code {
+      background: var(--code-bg);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      font-family: 'Fira Code', monospace;
+    }
+
+    pre {
+      background: var(--code-block-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+
+      code {
+        background: none;
+        padding: 0;
+      }
+    }
+
+    blockquote {
+      border-left: 4px solid var(--primary-color);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    ul, ol {
+      margin: 1.5rem 0;
+      padding-left: 1.5rem;
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  .articleActions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding-top: 1rem;
+
+    .actionButton {
+      min-width: 100px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+
+    .headerTitle {
+      font-size: 1.5rem;
+    }
+
+    .meta {
+      .stats {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+    }
+
+    .articleActions {
+      flex-wrap: wrap;
+      
+      .actionButton {
+        flex: 1;
+      }
+    }
+  }
+} 
